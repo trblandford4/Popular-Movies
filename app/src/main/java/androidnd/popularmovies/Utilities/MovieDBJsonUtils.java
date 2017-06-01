@@ -1,12 +1,8 @@
-package androidnd.popularmovies.utilities;
-
-import android.content.Context;
+package androidnd.popularmovies.Utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.HttpURLConnection;
 
 import androidnd.popularmovies.DataTypes.Movie;
 

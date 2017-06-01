@@ -37,6 +37,10 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
+    public String getFullPosterURL() {
+        return "http://image.tmdb.org/t/p/w185/" + posterPath;
+    }
+
     public int getId() {
         return id;
     }

@@ -1,13 +1,10 @@
-package androidnd.popularmovies.utilities;
+package androidnd.popularmovies.Utilities;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 
 import java.net.URL;
 
 import androidnd.popularmovies.DataTypes.Movie;
-import androidnd.popularmovies.MainActivity;
 
 /**
  * Created by rayblandford on 5/30/17.

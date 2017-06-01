@@ -1,7 +1,6 @@
-package androidnd.popularmovies.utilities;
+package androidnd.popularmovies.Utilities;
 
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +17,7 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIE_BASE_URL =
-            "http://api.themoviedb.org/3/movie/";
+            "http://api.themoviedb.org/3/movie/popular?api_key=a75ad9e4d1d5d4bc066c416616faa97d";
     private final static String POP_PATH = "popular";
     private final static String TOP_RATED_PATH = "top_rated";
 
