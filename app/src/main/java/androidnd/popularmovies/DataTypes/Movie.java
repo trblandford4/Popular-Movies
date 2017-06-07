@@ -1,9 +1,12 @@
 package androidnd.popularmovies.DataTypes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Custom Java Object to represent a Movie.
  */
-public class Movie {
+public class Movie implements Parcelable {
     private int id;
     private String posterPath;
     private String ogTitle;
@@ -35,6 +38,41 @@ public class Movie {
         this.popularity = popularity;
         this.voteCount = voteCount;
         this.voteAverage = voteAverage;
+    }
+
+    private Movie (Parcel parcel) {
+        posterPath = parcel.readString();
+        ogTitle = parcel.readString();
+        overview = parcel.readString();
+        voteAverage = parcel.readDouble();
+        releaseDate = parcel.readString();
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(posterPath);
+        parcel.writeString(ogTitle);
+        parcel.writeString(overview);
+        parcel.writeString(releaseDate);
+        parcel.writeDouble(voteAverage);
     }
 
     public String getFullPosterURL() {

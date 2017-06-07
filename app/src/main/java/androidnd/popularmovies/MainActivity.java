@@ -1,19 +1,23 @@
 package androidnd.popularmovies;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.net.URL;
-import java.util.Arrays;
 
 import androidnd.popularmovies.DataTypes.Movie;
-import androidnd.popularmovies.Utilities.FetchMovieDataTask;
 import androidnd.popularmovies.Utilities.MovieDBJsonUtils;
 import androidnd.popularmovies.Utilities.NetworkUtils;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MOVIE_DETAILS_EXTRA = "MOVIE";
+
 
     private GridView mGridView;
     private MovieAdapter mMovieAdapter;
@@ -24,13 +28,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_discovery);
 
         mGridView = (GridView) findViewById(R.id.gv_movies_grid);
+        mGridView.setOnItemClickListener(movieClickHandler);
 
         new FetchMovieDataTask().execute("popular");
 
     }
 
-    class FetchMovieDataTask extends AsyncTask<String, Void, Movie[]> {
+    private final GridView.OnItemClickListener movieClickHandler = new GridView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Movie movie = (Movie) parent.getItemAtPosition(position);
+            Intent launchMovieDetailsIntent = new Intent(getApplicationContext(), MovieDetailsActivity.class);
+            launchMovieDetailsIntent.putExtra(MOVIE_DETAILS_EXTRA, movie);
+            startActivity(launchMovieDetailsIntent);
 
+        }
+    };
+
+
+    class FetchMovieDataTask extends AsyncTask<String, Void, Movie[]> {
         @Override
         protected Movie[] doInBackground(String... params) {
 
