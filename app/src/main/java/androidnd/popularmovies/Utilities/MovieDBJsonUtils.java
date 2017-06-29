@@ -45,9 +45,9 @@ public final class MovieDBJsonUtils {
             String ogTitle;
             String overview;
             String releaseDate;
-            int voteCount;
-            double popularity;
-            double voteAverage;
+            String voteCount;
+            String popularity;
+            String voteAverage;
 
             /* Get the JSON object representing the day */
             JSONObject currMovie = movieArray.getJSONObject(i);
@@ -57,13 +57,21 @@ public final class MovieDBJsonUtils {
             ogTitle = currMovie.getString(MDP_OG_TITLE);
             overview = currMovie.getString(MDP_OVERVIEW);
             releaseDate = currMovie.getString(MDP_RELEASE_DATE);
-            voteCount = currMovie.getInt(MDP_VOTE_COUNT);
-            popularity = currMovie.getDouble(MDP_POPULARITY);
-            voteAverage = currMovie.getDouble(MDP_VOTE_AVG);
+            voteCount = currMovie.getString(MDP_VOTE_COUNT);
+            popularity = currMovie.getString(MDP_POPULARITY);
+            double avgAsDouble = currMovie.getDouble(MDP_VOTE_AVG);
+            voteAverage = Double.toString(avgAsDouble);
 
-
-            parsedMovieData[i] = new Movie(id, posterPath, ogTitle, overview, releaseDate,
-                    popularity, voteCount, voteAverage);
+            parsedMovieData[i] = new Movie(
+                    id,
+                    posterPath,
+                    ogTitle,
+                    overview,
+                    releaseDate,
+                    popularity,
+                    voteCount,
+                    voteAverage
+            );
         }
 
         return parsedMovieData;

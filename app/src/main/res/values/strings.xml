@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Popular Movies</string>
     <string name="error_message">We\'re sorry, we\'re unable to load movies at this time.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_movie_title">Default Movie Title</string>
+    <string name="default_overview">Default Overview</string>
+    <string name="default_release_date">Default Release Date</string>
+    <string name="default_rating">Default Rating</string>
+    <string name="label_movie_details">Movie Details</string>
+    <string name="error_network_connection">Oops! Please connect to the internet and try again.</string>
 </resources>

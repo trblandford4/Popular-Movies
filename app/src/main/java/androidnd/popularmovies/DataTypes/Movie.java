@@ -12,9 +12,9 @@ public class Movie implements Parcelable {
     private String ogTitle;
     private String overview;
     private String releaseDate;
-    private double popularity;
-    private int voteCount;
-    private double voteAverage;
+    private String popularity;
+    private String voteCount;
+    private String voteAverage;
 
     /**
      * Custom Constructor that populates all fields for a Movie object.
@@ -29,7 +29,7 @@ public class Movie implements Parcelable {
      * @param voteAverage the average rating of the movie
      */
     public Movie(int id, String posterPath, String ogTitle, String overview, String releaseDate,
-                 double popularity, int voteCount, double voteAverage) {
+                 String popularity, String voteCount, String voteAverage) {
         this.id = id;
         this.posterPath = posterPath;
         this.ogTitle = ogTitle;
@@ -44,12 +44,11 @@ public class Movie implements Parcelable {
         posterPath = parcel.readString();
         ogTitle = parcel.readString();
         overview = parcel.readString();
-        voteAverage = parcel.readDouble();
         releaseDate = parcel.readString();
+        voteAverage = parcel.readString();
     }
 
     public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
-
         @Override
         public Movie createFromParcel(Parcel source) {
             return new Movie(source);
@@ -72,11 +71,11 @@ public class Movie implements Parcelable {
         parcel.writeString(ogTitle);
         parcel.writeString(overview);
         parcel.writeString(releaseDate);
-        parcel.writeDouble(voteAverage);
+        parcel.writeString(voteAverage);
     }
 
     public String getFullPosterURL() {
-        return "http://image.tmdb.org/t/p/w185/" + posterPath;
+        return "http://image.tmdb.org/t/p/w780/" + posterPath;
     }
 
     public int getId() {
@@ -119,27 +118,27 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
-    public double getPopularity() {
+    public String getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(double popularity) {
+    public void setPopularity(String popularity) {
         this.popularity = popularity;
     }
 
-    public int getVoteCount() {
+    public String getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(int voteCount) {
+    public void setVoteCount(String voteCount) {
         this.voteCount = voteCount;
     }
 
-    public double getVoteAverage() {
+    public String getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(double voteAverage) {
+    public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
 }

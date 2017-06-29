@@ -22,6 +22,8 @@ import androidnd.popularmovies.DataTypes.Movie;
 
 public class MovieAdapter extends ArrayAdapter<Movie> {
 
+    private Movie[] mMovies;
+
     public MovieAdapter(Context context, Movie[] movieList) {
         super(context, 0, movieList);
     }
@@ -36,8 +38,13 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
 
         ImageView posterView = (ImageView) convertView.findViewById(R.id.iv_movie_poster);
-        Picasso.with(getContext()).load(movie.getFullPosterURL()).resize(185, 278).into(posterView);
+        Picasso.with(getContext()).load(movie.getFullPosterURL()).placeholder(R.drawable.movie_poster_unavailable).into(posterView);
 
         return convertView;
+    }
+
+    public void setMovieData(Movie[] movies) {
+        mMovies = movies;
+        notifyDataSetChanged();
     }
 }

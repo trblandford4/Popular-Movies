@@ -17,11 +17,11 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIE_BASE_URL =
-            "http://api.themoviedb.org/3/movie/popular?api_key=a75ad9e4d1d5d4bc066c416616faa97d";
+            "http://api.themoviedb.org/3/movie/";
     private final static String POP_PATH = "popular";
     private final static String TOP_RATED_PATH = "top_rated";
 
-    private static final String apiKey = "a75ad9e4d1d5d4bc066c416616faa97d";
+    private static final String apiKey = "";
 
     final static String  API_KEY_PARAM = "api_key";
 
@@ -31,12 +31,12 @@ public class NetworkUtils {
      * @return The Url to use to query the Movie Database server.
      */
     public static URL buildUrl(boolean popularSelected) {
-        Uri builtUri = Uri.parse(MOVIE_BASE_URL);
+        Uri builtUri = null;
         if(popularSelected) {
-            builtUri.buildUpon().appendPath(POP_PATH)
+            builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon().appendPath(POP_PATH)
                     .appendQueryParameter(API_KEY_PARAM, apiKey).build();
         } else {
-            builtUri.buildUpon().appendPath(TOP_RATED_PATH)
+            builtUri = Uri.parse(MOVIE_BASE_URL).buildUpon().appendPath(TOP_RATED_PATH)
                     .appendQueryParameter(API_KEY_PARAM, apiKey).build();
         }
 
