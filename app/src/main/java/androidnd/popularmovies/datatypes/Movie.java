@@ -1,4 +1,4 @@
-package androidnd.popularmovies.DataTypes;
+package androidnd.popularmovies.datatypes;
 
 import android.os.Parcel;
 import android.os.Parcelable;
