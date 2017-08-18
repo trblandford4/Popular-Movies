@@ -1,94 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
+    android:padding="@dimen/padding_movie_details_container"
     android:weightSum="1"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_movie_poster_details"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:layout_width="@dimen/image_width_details"
+            android:layout_height="@dimen/image_height_details"
+            android:layout_weight="0.35" />
+
+        <TextView
+            android:id="@+id/tv_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_bottom_details"
+            android:paddingTop="@dimen/padding_top_details"
+            tools:text="@string/default_movie_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_bottom_details"
+            tools:text="@string/default_overview" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/iv_movie_poster_details"
-                android:layout_width="182dp"
-                android:layout_height="167dp"
-                android:layout_weight="0.35"
-                app:srcCompat="@mipmap/ic_launcher" />
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_movie_title"
-                android:layout_width="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="5dp"
-                android:text="@string/default_movie_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
+                android:layout_weight="1"
+                android:text="@string/average_rating_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
             <TextView
-                android:id="@+id/tv_overview"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="@string/default_overview" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Average Rating:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Release Date:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_avg_rating"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/default_rating" />
-
-                <TextView
-                    android:id="@+id/tv_release_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/default_release_date" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:text="@string/release_date_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_avg_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/padding_bottom_details"
+                android:paddingTop="@dimen/padding_top_details"
+                tools:text="@string/default_rating" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/padding_bottom_details"
+                android:paddingTop="@dimen/padding_top_details"
+                tools:text="@string/default_release_date" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

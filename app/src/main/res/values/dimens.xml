@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_movie_details_container">16dp</dimen>
+    <dimen name="image_width_details">182dp</dimen>
+    <dimen name="image_height_details">167dp</dimen>
+    <dimen name="padding_bottom_details">10dp</dimen>
+    <dimen name="padding_top_details">5dp</dimen>
+</resources>

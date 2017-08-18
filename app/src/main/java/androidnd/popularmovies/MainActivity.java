@@ -4,12 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
-import android.os.Parcelable;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.PopupMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,9 +16,8 @@ import android.widget.Toast;
 
 import java.net.URL;
 
-import androidnd.popularmovies.DataTypes.Movie;
-import androidnd.popularmovies.Utilities.MovieDBJsonUtils;
-import androidnd.popularmovies.Utilities.NetworkUtils;
+import androidnd.popularmovies.datatypes.Movie;
+import androidnd.popularmovies.utilities.FetchMovieDataTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,11 +55,13 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.action_movies_sort, menu);
 
-        if (selected == -1){
+        if (selected == -1) {
+            mMenuItem = (MenuItem) menu.findItem(R.id.sort_popular);
+            mMenuItem.setChecked(true);
             return true;
         }
 
-        switch (selected){
+        switch (selected) {
             case R.id.sort_popular:
                 mMenuItem = (MenuItem) menu.findItem(R.id.sort_popular);
                 mMenuItem.setChecked(true);
@@ -81,29 +78,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mMovieAdapter != null || !isNetworkAvailable()) {
-            int id = item.getItemId();
-            switch (id) {
-                case R.id.sort_popular:
-                    mMovieAdapter.setMovieData(null);
-                    sortByPopular();
-                    selected = id;
-                    item.setChecked(true);
-                    return true;
-                case R.id.sort_rating:
-                    mMovieAdapter.setMovieData(null);
-                    sortByHighestRated();
-                    selected = id;
-                    item.setChecked(true);
-                    return true;
-                default:
-                    return super.onOptionsItemSelected(item);
-            }
-        } else {
-            Toast.makeText(this, getString(R.string.error_network_connection), Toast.LENGTH_LONG).show();
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.sort_popular:
+                sortByPopular();
+                selected = id;
+                item.setChecked(true);
+                return true;
+            case R.id.sort_rating:
+                sortByHighestRated();
+                selected = id;
+                item.setChecked(true);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -113,16 +102,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sortByHighestRated() {
+        if (mMovieAdapter != null) {
+            mMovieAdapter.setMovieData(null);
+        }
         if (isNetworkAvailable()) {
-            new FetchMovieDataTask().execute("highest-rated");
+            new FetchMovieDataTask(mMovieAdapter, mGridView, this).execute("highest-rated");
         } else {
             Toast.makeText(this, getString(R.string.error_network_connection), Toast.LENGTH_LONG).show();
         }
     }
 
     private void sortByPopular() {
+        if (mMovieAdapter != null) {
+            mMovieAdapter.setMovieData(null);
+        }
         if (isNetworkAvailable()) {
-            new FetchMovieDataTask().execute("popular");
+            new FetchMovieDataTask(mMovieAdapter, mGridView, this).execute("popular");
         } else {
             Toast.makeText(this, getString(R.string.error_network_connection), Toast.LENGTH_LONG).show();
         }
@@ -152,41 +147,4 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
-
-    class FetchMovieDataTask extends AsyncTask<String, Void, Movie[]> {
-        @Override
-        protected Movie[] doInBackground(String... params) {
-
-            /* If there's no zip code, there's nothing to look up. */
-            if (params.length == 0) {
-                return null;
-            }
-
-            boolean popularSelected = params[0].equals("popular");
-            URL movieRequestUrl = NetworkUtils.buildUrl(popularSelected);
-
-            try {
-                String jsonMovieResponse = NetworkUtils
-                        .getResponseFromHttpUrl(movieRequestUrl);
-
-                Movie[] jsonMovieData = MovieDBJsonUtils
-                        .getMovieDataFromJson(jsonMovieResponse);
-
-                return jsonMovieData;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Movie[] movies) {
-            if (movies != null) {
-                mMovieAdapter = new MovieAdapter(MainActivity.this, movies);
-                mGridView.setAdapter(mMovieAdapter);
-            }
-        }
-    }
 }

@@ -1,10 +1,10 @@
-package androidnd.popularmovies.Utilities;
+package androidnd.popularmovies.utilities;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidnd.popularmovies.DataTypes.Movie;
+import androidnd.popularmovies.datatypes.Movie;
 
 /**
  * Utility functions to handle The Movie Database JSON data.
